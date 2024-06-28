@@ -6,7 +6,7 @@ import DataBase
 
 #criar nossa janela
 jan = Tk()
-jan.title("DP Systems - Acess Panel")
+jan.title("Sistema feito por Ana")
 jan.geometry("600x300")
 jan.configure(background="white")
 jan.resizable(width=False,height=False) 
@@ -28,13 +28,13 @@ RightFrame.pack(side=RIGHT)
 LogoLabel = Label(LeftFrame, image=Logo, bg="#c5ebd0")
 LogoLabel.place(x=0,y=40)
 
-UserLabel = Label(RightFrame, text="Username:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
+UserLabel = Label(RightFrame, text="Usuário:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
 UserLabel.place(x=5,y=100)
 
 UserEntry = ttk.Entry(RightFrame,width=30)
 UserEntry.place(x=150,y=110)
 
-PassLabel = Label(RightFrame, text="Password:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
+PassLabel = Label(RightFrame, text="Senha:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
 PassLabel.place(x=5,y=150)
 
 PassEntry = ttk.Entry(RightFrame,width=30,show="•")
@@ -52,9 +52,9 @@ def Login():
     VerifyLogin = DataBase.cursor.fetchone()
     try:
         if (User in VerifyLogin and Pass in VerifyLogin):
-            messagebox.showinfo(title="Login info", message="Acesso confirmado. Bem-vindo!")
+            messagebox.showinfo(title="Login informação", message="Acesso confirmado. Bem-vindo!")
     except:
-        messagebox.showinfo(title="Login info", message="Acesso negado. Verifique se está cadastrado no sistema!")
+        messagebox.showinfo(title="Login informação", message="Acesso negado. Verifique se está cadastrado no sistema!")
 
 #botões 
 LoginButton = ttk.Button (RightFrame, text= "Login", width=30, command=Login)
@@ -65,7 +65,7 @@ def Register():
     LoginButton.place(x=5000)
     RegisterButton.place(x=5000)
     #Inserindo widgets de cadastro
-    NomeLabel = Label(RightFrame, text="Name:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
+    NomeLabel = Label(RightFrame, text="Nome:", font=("Century Gothic", 20), bg="#91c3d7", fg="white")
     NomeLabel.place(x=5,y=5)
 
     NomeEntry = ttk.Entry(RightFrame,width=39)
@@ -84,15 +84,15 @@ def Register():
         Pass = PassEntry.get()
 
         if (Name == "" and Email == "" and User == "" and Pass == ""):
-            messagebox.showerror(title="Register Error", message="Não deixe nenhum campo vazio. Preencha todos os campos")
+            messagebox.showerror(title=" Erro no registro", message="Não deixe nenhum campo vazio. Preencha todos os campos")
         else:
             DataBase.cursor.execute("""
             INSERT INTO Users(Name, Email, User, Password) VALUES(?, ?, ?, ?)
             """,(Name, Email, User, Pass))
             DataBase.conn.commit()
-            messagebox.showinfo(title="Register info", message="Conta criada com sucesso")
+            messagebox.showinfo(title="Informações do registro", message="Conta criada com sucesso")
 
-    Register = ttk.Button (RightFrame, text= "Register", width=30,command=RegisterToDataBase)
+    Register = ttk.Button (RightFrame, text= "Registrar", width=30,command=RegisterToDataBase)
     Register.place(x=100, y=225)
 
     def BackToLogin():
@@ -107,10 +107,10 @@ def Register():
         LoginButton.place(x=100)
         RegisterButton.place(x=125)
 
-    Back = ttk.Button (RightFrame, text= "Back", width=20, command=BackToLogin)
+    Back = ttk.Button (RightFrame, text= "voltar", width=20, command=BackToLogin)
     Back.place(x=125,y=260)
 
-RegisterButton = ttk.Button (RightFrame, text= "Register", width=20, command=Register)
+RegisterButton = ttk.Button (RightFrame, text= "Registrar", width=20, command=Register)
 RegisterButton.place(x=125, y=260)
 
 jan.mainloop()
